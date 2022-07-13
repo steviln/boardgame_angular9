@@ -1,0 +1,38 @@
+<div *ngIf="company !== null">
+    <div class="row">
+        <div class="form-group col-sm-12 col-md-4"></div><!-- comment -->
+        <div class="form-group col-sm-12 col-md-4">
+            <h1>Rediger selskap</h1>
+  
+            <div class="form-group col-sm-12 col-md-12">
+                <label for="navn">Navn</label>
+                <input type="text" class="form-control" id="navn" [(ngModel)]="company.navn"  name="navn"/>
+            </div> 
+
+        <br />
+        <div class="form-group col-sm-12 col-md-5">
+            <button class="btn btn-success" (click)="post()">Lagre</button>
+        </div>
+        </div><!-- comment --> 
+        <div class="form-group col-sm-12 col-md-4"></div>   
+    </div>
+</div>
+
+<div *ngIf="company === null">
+    <div class="row">
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column"><button class="btn btn-success" *ngIf="!loginStatus" (click)="assignCompany(null)"> Opprett Ny </button></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column">
+            <table width="100%">
+                <tr *ngFor="let company of companies;">
+                    <td>{{ company.navn }}</td><td> <button class="display-button link-style" *ngIf="!loginStatus" (click)="assignCompany(company)"> Rediger </button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-4 front-listing-column"></div>
+    </div>
+</div>

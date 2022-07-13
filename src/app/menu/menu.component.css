@@ -1,0 +1,15 @@
+.mainmenu{
+    background-color:#74E872;
+}
+.mainmenu li{
+    margin-right:38px;
+}
+.mainmenu a{
+    color:#3D753C;
+    text-decoration:none;
+    font-weight:bold;
+    text-transform:uppercase;
+    font-family:"Times New Roman";
+}
+.menucontainer{       
+}

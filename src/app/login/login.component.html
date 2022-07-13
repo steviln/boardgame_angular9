@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="form-group col-sm-12 col-md-4"></div>
+    <div class="form-group col-sm-12 col-md-4">
+        <div *ngIf="loginStatus">
+            <h1>Login</h1>
+            <div>
+                <label for="brukernavn">Brukernavn</label>
+                <input type="text" class="form-control" id="brukernavn" [(ngModel)]="brukernavn"  name="brukernavn"/>
+            </div>
+            <div>
+                <label for="brukernavn">Brukernavn</label>
+                <input type="password" class="form-control" id="passord" [(ngModel)]="passord"  name="passord"/>
+            </div>
+            <div>
+                <button (click)="post()">{{buttonText}}</button>
+            </div>
+            <div class="error-message-box">           
+                {{ errorMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4"></div>
+</div>

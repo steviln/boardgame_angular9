@@ -1,0 +1,85 @@
+<div *ngIf="gamedata !== null" id="displaygame">
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-4"></div><!-- comment -->
+    <div class="form-group col-sm-12 col-md-4">
+        <h1>{{ gamedata.game.navn}}</h1>
+        <div class="form-group col-sm-12 col-md-12">
+            <label for="antall">Antall spillere</label>
+            {{ gamedata.game.antall }}
+        </div>
+        <div *ngIf="gamedata.game.fraksjoner.length > 0" class="form-group col-sm-12 col-md-12">
+            <h2>Spillerfraksjoner</h2>
+            <div *ngFor="let fraksjon of gamedata.game.fraksjoner; let i = index;">
+                {{ gamedata.game.fraksjoner[i].navn }}
+            </div>
+        </div>
+        
+        <div>
+            <br /><br />
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Spiller</th>
+                        <th>Spillinger</th>
+                        <th>Rangering</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of gamedata.playerDTO">
+                        <td>{{ row.navn }}</td>
+                        <td>{{ row.spillinger }}</td>
+                        <td>{{ row.score }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="gamedata.factionDTO != null && gamedata.factionDTO.length > 0">
+            <br /><br />
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Fraksjon</th>
+                        <th>Spillinger</th>
+                        <th>Rangering</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of gamedata.factionDTO">
+                        <td>{{ row.fraksjonsnavn }}</td>
+                        <td>{{ row.spillinger }}</td>
+                        <td>{{ row.score }}</td>
+                    </tr>
+                </tbody>
+            </table>                        
+        </div>
+        <div *ngIf="gamedata.factionPlayerDTO != null && gamedata.factionPlayerDTO.length > 0">
+            <br /><br />
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Spiller</th>
+                        <th>Fraksjon</th>
+                        <th>Spillinger</th>
+                        <th>Rangering</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of gamedata.factionPlayerDTO">
+                        <td>{{ row.navn }}</td>
+                        <td>{{ row.fraksjonsnavn }}</td>
+                        <td>{{ row.spillinger }}</td>
+                        <td>{{ row.score }}</td>
+                    </tr>
+                </tbody>
+            </table>                        
+        </div>
+        <div class="error-message-box">           
+                {{ errorMessage }}
+        </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4"><a class="btn btn-success" *ngIf="!loginStatus && status >= 2" [routerLink]="['/editgamesession',0,gamedatagame.id]">Opprett Spilling</a></div>
+ 
+    
+    
+  </div>
+</div>

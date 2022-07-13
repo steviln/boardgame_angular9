@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-4 front-listing-column"></div>
+    <div class="col-sm-4 front-listing-column">
+    <h1>Rediger bruker</h1>
+    <form>
+        <div>
+            <label for="brukernavn">Brukernavn</label>
+            <input type="text" class="form-control" id="brukernavn" [(ngModel)]="player.brukernavn"  name="brukernavn"/>
+        </div>
+        <div>
+            <label for="fornavn">Fornavn</label>
+            <input type="text" class="form-control" id="fornavn" [(ngModel)]="player.fornavn"  name="fornavn"/>
+        </div>
+        <div>
+            <label for="etternavn">Etternavn</label>
+            <input type="text" class="form-control" id="etternavn" [(ngModel)]="player.etternavn"  name="etternavn"/>
+        </div>
+        <div>
+            <label for="epost">Epost</label>
+            <input type="text" class="form-control" id="epost" [(ngModel)]="player.epost"  name="epost"/>
+        </div>
+        <div>
+            <label for="passorden">Passord</label>
+            <input type="password" class="form-control" id="passorden" [(ngModel)]="passorden"  name="passorden"/>
+        </div>
+        <div>
+            <label for="passordto">Gjenta passord</label>
+            <input type="password" class="form-control" id="passordto" [(ngModel)]="passordto"  name="passordto"/>
+        </div>
+    </form>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-success" (click)="post()">{{buttonText}}</button>
+        </div>
+    </div>
+    
+    <div class="col-sm-4 front-listing-column"></div>
+    
+</div>

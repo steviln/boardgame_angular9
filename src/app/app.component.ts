@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angularspringfrontend';
+  title:string = 'Board Game Register';
+  
+    constructor() { 
+
+    }
+
 }

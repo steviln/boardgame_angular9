@@ -1,0 +1,20 @@
+<div *ngIf="game === null" id="sessionlisting">
+    <div class="row">
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column"><a class="btn btn-success" [routerLink]="['/editgame',0]" *ngIf="!loginStatus && status >= 80"> Legg til ny </a></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 front-listing-column"></div>
+        <div class="col-sm-4 front-listing-column">
+            <table width="100%">
+                <tr *ngFor="let game of games">
+                    <td>{{ game.navn }}</td><td> <a class="btn btn-success" [routerLink]="['/displaygame',game.id]"> Vis </a> </td><td *ngIf="!loginStatus && status >= 80"> <a class="link-style" [routerLink]="['/editgame',game.id]"> Rediger </a> </td>
+                </tr>         
+            </table>
+        </div>
+        <div class="col-sm-4 front-listing-column"></div>
+    </div>
+</div>
+
+

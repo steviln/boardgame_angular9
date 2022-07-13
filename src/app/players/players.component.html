@@ -1,0 +1,17 @@
+<div class="row" *ngIf="!loginStatus && status >= 80">
+    <div class="col-sm-4 front-listing-column"></div>
+    <div class="col-sm-4 front-listing-column"></div>
+    <div class="col-sm-4 front-listing-column"><a class="btn btn-success" [routerLink]="['/editspiller',0]"> Legg til ny </a></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4 front-listing-column"></div>
+    <div class="col-sm-4 front-listing-column">
+        <table width="100%">
+            <tr *ngFor="let player of players">
+                <td>{{ player.fornavn }} {{ player.etternavn }}</td><td> <a class="display-button link-style" [routerLink]="['/spiller',player.id]"> Vis </a> </td><td *ngIf="!loginStatus && (status >= 80 || userID == player.id)"> <a class="display-button link-style" [routerLink]="['/editspiller',player.id]"> Rediger </a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-4 front-listing-column"></div>
+</div>
