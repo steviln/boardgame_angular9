@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { routing} from './app.routing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 
@@ -21,6 +21,7 @@ import { DeltakelseComponent } from './partials/deltakelse/deltakelse.component'
 import { LoginComponent } from './login/login.component';
 
 import { SessionService } from './service/session.service';
+import { AjaxerrorService } from './ajaxerror.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GamedisplayComponent } from './gamedisplay/gamedisplay.component';
@@ -62,7 +63,8 @@ export function initializeApp1(appInitService: SessionService) {
     DragDropModule
   ],
   providers: [ 
-    SessionService,{ provide: APP_INITIALIZER,useFactory: initializeApp1, deps: [SessionService], multi: true}
+    SessionService,{ provide: APP_INITIALIZER,useFactory: initializeApp1, deps: [SessionService], multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AjaxerrorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

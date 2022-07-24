@@ -27,12 +27,10 @@ export class EditgamesessionComponent implements OnInit {
     game:Game;
     spillere:Player[];
     gamesession:Gamesession;
-    gameservice:GamesService;
     initDate:String;
 
     
   constructor(private _playerservice: PlayersService, private _gameservice: GamesService, private _Activatedroute:ActivatedRoute) { 
-        this.gameservice = _gameservice;
         this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
         let gameID = this._Activatedroute.snapshot.paramMap.get("game");    
         
@@ -160,7 +158,7 @@ export class EditgamesessionComponent implements OnInit {
     this.gamesession.deltakelser = deltakelser;
     this.gamesession.competitors = deltakelser.length;
     this.gamesession.dato = this.initDate;
-    this.gameservice.postGamesession(this.gamesession, this);
+    this._gameservice.postGamesession(this.gamesession, this);
   }
   
   assignNewID(data){

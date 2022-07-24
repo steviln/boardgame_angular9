@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 import { GamesResult } from '../data/gamesresult';
 import { Game } from '../data/game';
 import { Gamesession } from '../data/gamesession';
@@ -12,22 +12,26 @@ import { EditgamesessionComponent } from '../editgamesession/editgamesession.com
 import { CompaniesComponent } from '../companies/companies.component';
 import { CompleteGameData } from '../data/completegamedata';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class GamesService {
 
+   baseUrl = environment.baseUrl; 
+   
    constructor(private _http: HttpClient) { }
   
    getGames():Observable<GamesResult[]>{
-      return this._http.get<GamesResult[]>("http://localhost:8080/rest/games");  
+      return this._http.get<GamesResult[]>(this.baseUrl + "/games");  
    }
    
    getGame(id: string):Observable<Game>{
       let parameter = new HttpParams();
       parameter.set("id",id);
       
-      return this._http.get<Game>("http://localhost:8080/rest/game?id=" + id,{ params: parameter });
+      return this._http.get<Game>(this.baseUrl + "/game?id=" + id,{ params: parameter });
    }
    
    getCompleteGame(id: string):Observable<CompleteGameData>{
