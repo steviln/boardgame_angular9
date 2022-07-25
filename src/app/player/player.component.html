@@ -1,1 +1,38 @@
-<p>player works!</p>
+<div *ngIf="player != null" id="displaygame">
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-4"></div><!-- comment -->
+    <div class="form-group col-sm-12 col-md-4">
+        <h1>{{ player.player.fornavn}} {{ player.player.etternavn}}</h1>  
+        
+             <div *ngIf="player.playerRankings != null && player.playerRankings.length > 0">
+            <br /><br />
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Spiller</th>
+                        <th>Spillinger</th>
+                        <th>Rangering</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of player.playerRankings">
+                        <td>{{ row.navn }}</td>
+                        <td>{{ row.spillinger }}</td>
+                        <td>{{ row.score }}</td>
+                    </tr>
+                </tbody>
+            </table>                        
+        </div>
+        <div class="error-message-box">           
+                {{ errorMessage }}
+        </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4"></div><!-- comment -->
+ 
+ 
+
+   
+    
+    
+  </div>
+</div>

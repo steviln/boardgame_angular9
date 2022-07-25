@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PlayerResult } from '../data/playerresult';
 import { Player } from '../data/player';
+import { CompletePlayerData } from '../data/completeplayerdata';
 import { EditplayerComponent } from '../editplayer/editplayer.component';
 
 @Injectable({
@@ -26,7 +27,14 @@ export class PlayersService {
       return this._http.get<Player>(this.baseUrl + "/player?id=" + id,{ params: parameter });
   }
   
-    getEditPlayer(id: string):Observable<Player>{
+  getCompletePlayer(id: string):Observable<CompletePlayerData>{
+      let parameter = new HttpParams();
+      parameter.set("id",id);
+      
+      return this._http.get<CompletePlayerData>(this.baseUrl + "/completeplayer?id=" + id,{ params: parameter });
+  }
+  
+ getEditPlayer(id: string):Observable<Player>{
       let parameter = new HttpParams();
       parameter.set("id",id);
       

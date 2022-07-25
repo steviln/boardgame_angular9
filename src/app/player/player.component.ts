@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayersService } from '../service/players.service';
-import { Player } from '../data/player';
+import { CompletePlayerData } from '../data/completeplayerdata';
 
 @Component({
   selector: 'app-player',
@@ -10,17 +10,20 @@ import { Player } from '../data/player';
 })
 export class PlayerComponent implements OnInit {
     id: Number;
-    player: Player;
+    player: CompletePlayerData;
 
   constructor(private _Activatedroute:ActivatedRoute, private _playerservice: PlayersService) { 
+     this.player = null;
      this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
-     _playerservice.getPlayer(this.id.toString()).subscribe(data => this.assignPlayer(data) ); 
+     _playerservice.getCompletePlayer(this.id.toString()).subscribe(data => this.assignPlayer(data) ); 
   }
   
 
   
   assignPlayer(data){
+      console.log(data);
       this.player = data;
+      console.log(this.player);
   }
 
   ngOnInit(): void {
