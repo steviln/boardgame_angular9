@@ -3,6 +3,7 @@ import { routing} from './app.routing';
 import { HttpClientModule,  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { AjaxerrorService } from './ajaxerror.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GamedisplayComponent } from './gamedisplay/gamedisplay.component';
+import { GamesessiondisplayComponent } from './gamesessiondisplay/gamesessiondisplay.component';
 
 
 export function initializeApp1(appInitService: SessionService) {
@@ -50,7 +52,8 @@ export function initializeApp1(appInitService: SessionService) {
     EditgamesessionComponent,
     DeltakelseComponent,
     LoginComponent,
-    GamedisplayComponent
+    GamedisplayComponent,
+    GamesessiondisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ export function initializeApp1(appInitService: SessionService) {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    NgSelectModule,
   ],
   providers: [ 
     SessionService,{ provide: APP_INITIALIZER,useFactory: initializeApp1, deps: [SessionService], multi: true},

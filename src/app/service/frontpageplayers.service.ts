@@ -15,11 +15,11 @@ export class FrontpageplayersService {
   constructor(private _http: HttpClient) { }
   
   getFrontpagePlayerData():Observable<FrontpagePlayerResult[]>{
-      return this._http.get<FrontpagePlayerResult[]>(this.baseUrl + "/frontpageplayerlist");      
+      return this._http.get<FrontpagePlayerResult[]>(this.baseUrl + "/player/frontpageplayerlist");      
    }
    
    getFrontpageGameData():Observable<FrontpageGamelistResult[]>{
-      return this._http.get<FrontpageGamelistResult[]>(this.baseUrl + "/gameslist");  
+      return this._http.get<FrontpageGamelistResult[]>(this.baseUrl + "/game/gameslist");  
    }
   
   

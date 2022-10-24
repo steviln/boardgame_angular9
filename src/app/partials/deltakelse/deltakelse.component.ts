@@ -8,7 +8,7 @@ import { Player } from '../../data/player';
   templateUrl: './deltakelse.component.html',
   styleUrls: ['./deltakelse.component.css']
 })
-export class DeltakelseComponent implements OnInit, OnChanges {
+export class DeltakelseComponent implements OnInit, OnChanges{
     @Input() game:Game;
     @Input() spillere:Player[];
     @Input() poeng:Number;
@@ -16,24 +16,44 @@ export class DeltakelseComponent implements OnInit, OnChanges {
     @Input() spiller:Number;
     @Input() fraksjonId:Number;
     @Input() delta:Participation;
+    spillerID:Player;
     
     @Output() objectChange = new EventEmitter();
 
     constructor() { 
-    
+       
     }
 
     ngOnInit(): void {
-        //this.spiller.detectChanges();
+        //this.spillerID = this.delta.spiller;
     }
+    
+
+    
+    spillerChanged(){
+
+        this.delta.spiller = this.spillerID.id;
+        this.spiller = this.spillerID.id;
+    }
+    
     
     ngOnChanges(changes: SimpleChanges) {
-        //Object.entries(changes).forEach(
-        //    ([key, value]) => this.sendChange(key,value.currentValue)
-        //);      
+        
+        if(changes["spiller"] && changes["spiller"].firstChange){
+            let selectedPlayer = this.spiller;
+            let komponent = this;
+            this.spillere.forEach(function(value){
+                if(value.id == selectedPlayer){
+                    komponent.spillerID = value;
+                }
+            });
+        }
     }
     
+    
     sendChange(prop:String,value:String){
+        //console.log(value);
+        //console.log(prop);
         //this.objectChange.emit(value);
     }
     

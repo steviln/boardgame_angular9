@@ -4,6 +4,7 @@ import { GamesService } from '../service/games.service';
 import { CompleteGameData } from '../data/completegamedata';
 import { Router } from '@angular/router';
 import { UserinfoComponent } from '../userinfo.component';
+import { Gamesession } from '../data/gamesession';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class GamedisplayComponent implements OnInit {
   id: Number;
   loginStatus:Boolean;
   status:Number;
+  sessions:Gamesession[];
 
   constructor(private _gameservice: GamesService, private _Activatedroute:ActivatedRoute) { 
       this.gamedata = null; 
@@ -38,8 +40,22 @@ export class GamedisplayComponent implements OnInit {
     }
   }
   
+  listSessions(data:Gamesession[]):void{
+      console.log(data);
+      this.sessions = data;
+  }
+  
+  displayRegistrarName(objekt:any) : string{
+        if(objekt === undefined || objekt === null){
+            return "";
+        }else{
+            return "registrert av " + objekt.fornavn + " " + objekt.etternavn;
+        }
+      }
+  
   assignCompleteGameData(data:CompleteGameData){
         this.gamedata = data;
+        this._gameservice.getGamesessionList(this.id.toString()).subscribe(data => this.listSessions(data));
         //console.log(data);
   }
 

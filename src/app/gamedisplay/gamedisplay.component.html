@@ -73,6 +73,13 @@
                 </tbody>
             </table>                        
         </div>
+        <div><h2>Spillinger</h2>
+            <table width="100%">
+                <tr *ngFor="let session of sessions">
+                    <td>{{ session.dato }} <i>{{ this.displayRegistrarName(session.registrar) }}</i></td><td> <a class="btn btn-success" [routerLink]="['/displaygamesession',session.id]"> Vis </a> </td><td *ngIf="!loginStatus && status >= 80"> <a class="link-style" [routerLink]="['/editgamesession',session.id,id]"> Rediger </a></td>
+                </tr>         
+            </table>
+        </div>
         <div class="error-message-box">           
                 {{ errorMessage }}
         </div>

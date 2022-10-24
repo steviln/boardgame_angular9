@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gamesession.component.css']
 })
 export class GamesessionComponent implements OnInit {
-  private sessionID:Number;
+  private sessionId:Number;
 
   constructor() { 
-    this.sessionID = null;
+    this.sessionId = null;
   }
 
   ngOnInit(): void {

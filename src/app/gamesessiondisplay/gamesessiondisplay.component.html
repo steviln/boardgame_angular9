@@ -1,0 +1,21 @@
+<div *ngIf="ready" id="displaygame">
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-4"></div>
+    <div class="form-group col-sm-12 col-md-4">
+        <h2>{{ gamesession.spillet.navn }}</h2>
+        <div *ngIf="gamesession.registrar !== null"><i>Registrert av {{ gamesession.registrar.fornavn }} {{ gamesession.registrar.etternavn }} {{ gamesession.dato | date: "dd.MM.yyyy" }}</i></div>
+        <div>
+            <table style="width:100%;">
+                <tr *ngFor="let play of gamesession.deltakelser">
+                    <td>{{ play.posisjon }}</td>
+                    <td>{{ play.spiller.fornavn }} {{ play.spiller.etternavn }}</td>
+                    <td><span *ngIf="play.fraksjon !== null">{{ play.fraksjon.navn }}</span></td>
+                    <td>{{ play.poeng }}</td>
+                </tr> 
+            </table>            
+        </div>
+        
+    </div>
+    <div class="form-group col-sm-12 col-md-4"></div>
+  </div>
+</div>

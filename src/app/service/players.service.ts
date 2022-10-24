@@ -17,33 +17,33 @@ export class PlayersService {
   constructor(private _http: HttpClient) { }
   
   getPlayerList():Observable<PlayerResult[]>{
-      return this._http.get<PlayerResult[]>(this.baseUrl + "/limitedplayerlist");  
+      return this._http.get<PlayerResult[]>(this.baseUrl + "/player/limitedplayerlist");  
   }
   
   getPlayer(id: string):Observable<Player>{
       let parameter = new HttpParams();
       parameter.set("id",id);
       
-      return this._http.get<Player>(this.baseUrl + "/player?id=" + id,{ params: parameter });
+      return this._http.get<Player>(this.baseUrl + "/player/player?id=" + id,{ params: parameter });
   }
   
   getCompletePlayer(id: string):Observable<CompletePlayerData>{
       let parameter = new HttpParams();
       parameter.set("id",id);
       
-      return this._http.get<CompletePlayerData>(this.baseUrl + "/completeplayer?id=" + id,{ params: parameter });
+      return this._http.get<CompletePlayerData>(this.baseUrl + "/player/completeplayer?id=" + id,{ params: parameter });
   }
   
  getEditPlayer(id: string):Observable<Player>{
       let parameter = new HttpParams();
       parameter.set("id",id);
       
-      return this._http.get<Player>(this.baseUrl + "/editplayer?id=" + id,{ params: parameter });
+      return this._http.get<Player>(this.baseUrl + "/player/editplayer?id=" + id,{ params: parameter });
   }
   
     
   postEditPlayer(player:Player,editplayer:EditplayerComponent){
-      this._http.post<Player>(this.baseUrl + "/editplayer",player).subscribe(data => editplayer.assignNewID(data) ); ;
+      this._http.post<Player>(this.baseUrl + "/player/editplayer",player).subscribe(data => editplayer.assignNewID(data) ); ;
   }
   
 }

@@ -2,9 +2,18 @@
     <div class="form-group col-sm-12 col-md-8">
         <div class="form-group col-sm-12 col-md-12">
             <label for="spiller">Spiller</label>
-            <select class="form-control" id="spiller" [(ngModel)]="delta.spiller" name="spiller">
+            <!-- <select class="form-control" id="spiller" [(ngModel)]="delta.spiller" name="spiller">
                 <option *ngFor="let spiller of spillere" [value]="spiller.id">{{ spiller?.fornavn }} {{ spiller?.etternavn }}</option>
-            </select>
+            </select> -->
+            
+            <ng-select id="spiller" [items]="spillere"
+               searchable="true"
+               bindLabel="navn"
+               placeholder="Velg spiller"
+               (change)="spillerChanged()"
+               [(ngModel)]="this.spillerID">
+            </ng-select>
+            
         </div>   
         <div class="form-group col-sm-12 col-md-12">
             <label for="fraksjonId">Fraksjoner</label>

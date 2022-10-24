@@ -8,7 +8,7 @@
         </div>
         <div *ngIf="game?.scenarios.length > 0" class="form-group col-sm-12 col-md-12">
             <label for="dato">Scenario</label>
-            <select class="form-control" id="scenarioID" [(ngModel)]="gamesession.scenarioID" name="scenarioID">
+            <select class="form-control" id="scenarioID" [(ngModel)]="gamesession.scenarioId" name="scenarioId">
                 <option *ngFor="let c of game.scenarios" [value]="c.id">{{ c?.navn }}</option>
             </select>
         </div>
@@ -24,7 +24,7 @@
         </div>
 
         <br />
-        <div class="form-group col-sm-12 col-md-12">s
+        <div class="form-group col-sm-12 col-md-12">
             <button class="btn btn-success" (click)="post()">Lagre</button>
         </div>
         <br />

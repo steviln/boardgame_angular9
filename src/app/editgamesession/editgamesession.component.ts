@@ -12,6 +12,7 @@ import { DeltakelseComponent } from '../partials/deltakelse/deltakelse.component
 import { UserinfoComponent } from '../userinfo.component';
 import { DatePipe } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 
 
@@ -27,13 +28,12 @@ export class EditgamesessionComponent implements OnInit {
     game:Game;
     spillere:Player[];
     gamesession:Gamesession;
-    initDate:String;
+    initDate:string;
 
     
-  constructor(private _playerservice: PlayersService, private _gameservice: GamesService, private _Activatedroute:ActivatedRoute) { 
+  constructor(private _playerservice: PlayersService, private _gameservice: GamesService, private _Activatedroute:ActivatedRoute, private router: Router) { 
         this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
         let gameID = this._Activatedroute.snapshot.paramMap.get("game");    
-        
         this.init_edit(gameID,_playerservice,_gameservice);
   }
   
@@ -45,20 +45,37 @@ export class EditgamesessionComponent implements OnInit {
   }
   
   construct_edit(data){
-      this.spillere = data[0];
+      this.spillere = data[0].map((i) => { i.navn = i.fornavn + ' ' + i.etternavn; return i; });;
       this.game = data[1];
-      let gamersession = <Gamesession>{id:null,dato:this.getTodaysDate(),scenarioID:null,competitors:0,spillet:this.game.id,deltakelser:null};
-      gamersession.deltakelser = new Array<Participation>();
-      for(let x = 0;x < this.game.antall;x++){
-        gamersession.deltakelser.push(<Participation>{ id:null,spiller:0,fraksjonId:0,poeng:(10 - x),posisjon:(x + 1) });
+      if(this.id == 0){
+        let gamersession = <Gamesession>{id:null,dato:this.getTodaysDate(),scenarioId:null,competitors:0,spillet:this.game.id,deltakelser:null};
+        gamersession.deltakelser = new Array<Participation>();
+        for(let x = 0;x < this.game.antall;x++){
+          gamersession.deltakelser.push(<Participation>{ id:null,spiller:0,fraksjonId:0,poeng:(10 - x),posisjon:(x + 1) });
+        }
+        this.gamesession = gamersession;
+      }else{
+        this._gameservice.getGamesession(this.id.toString()).subscribe(res => this.set_gamesession(res));  
       }
-      this.gamesession = gamersession;
-  }
+   }
+   
+   set_gamesession(data:Gamesession) : void{
+       this.gamesession = data;
+       this.gamesession.deltakelser.sort(function(a,b){
+                if(a.posisjon > b.posisjon)
+                    return 1;
+                    else if(a.posisjon < b.posisjon){
+                            return -1;
+                        }else{
+                                return 0;
+                            }
+           });
+    }
   
   getTodaysDate(){
         let datePipe: DatePipe = new DatePipe('en-US');
         let date = new Date();
-        return datePipe.transform(date, 'MM/dd/yyyy');
+        return datePipe.transform(date, 'yyyy-MM-dd');
   }
   
   sortByPosition(type:Number){
@@ -151,18 +168,20 @@ export class EditgamesessionComponent implements OnInit {
   post(){
     let deltakelser = Array<Participation>();
     this.gamesession.deltakelser.forEach(function(value){
-        if(value.spiller && value.spiller != null && value.spiller != 0){
+        if(value.spiller && value.spiller != null){
             deltakelser.push(value);
         }
     });
     this.gamesession.deltakelser = deltakelser;
     this.gamesession.competitors = deltakelser.length;
     this.gamesession.dato = this.initDate;
+    console.log(this.gamesession);
     this._gameservice.postGamesession(this.gamesession, this);
   }
   
   assignNewID(data){
     console.log(data);
+    this.router.navigate(['games']);
   }
 
 

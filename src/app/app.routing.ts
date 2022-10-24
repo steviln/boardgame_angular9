@@ -11,6 +11,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { EditgamesessionComponent } from './editgamesession/editgamesession.component';
 import { LoginComponent } from './login/login.component';
 import { GamedisplayComponent } from './gamedisplay/gamedisplay.component';
+import { GamesessiondisplayComponent } from './gamesessiondisplay/gamesessiondisplay.component';
 
 
 export const routing = RouterModule.forRoot([
@@ -24,6 +25,7 @@ export const routing = RouterModule.forRoot([
     {path: 'company/:id', component: CompanyComponent },
     {path: 'login', component: LoginComponent },
     {path: 'displaygame/:id', component: GamedisplayComponent },
-    {path: 'editgamesession/:id/:game', component: EditgamesessionComponent }
+    {path: 'editgamesession/:id/:game', component: EditgamesessionComponent },
+    {path: 'displaygamesession/:id', component: GamesessiondisplayComponent }
     
 ]);
